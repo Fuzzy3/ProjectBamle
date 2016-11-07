@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ProjectBamle</string>
     <string name="action_settings">Settings</string>
+    <string name="last">last</string>
+    <string name="first">first</string>
+    <string name="hello_world">Hello World!</string>
 </resources>
