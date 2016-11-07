@@ -1,6 +1,8 @@
 package com.oestjacobsen.android.projectbamle;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.oestjacobsen.android.projectbamle.Fragments.HistoryFragment;
 import com.oestjacobsen.android.projectbamle.Fragments.TodayFragment;
@@ -32,6 +35,14 @@ public class MainActivityFragment extends Fragment {
         ViewPager vpPager = (ViewPager) v.findViewById(R.id.vpPager);
         viewPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager(),getActivity());
         vpPager.setAdapter(viewPagerAdapter);
+
+        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.floatingButAdd);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "BUTTON PRESSED!! WOOP", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);

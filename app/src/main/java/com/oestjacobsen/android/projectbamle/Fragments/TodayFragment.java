@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.oestjacobsen.android.projectbamle.R;
 
@@ -19,6 +20,8 @@ public class TodayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.today_fragment, container, false);
 
+        TextView todayText = (TextView) v.findViewById(R.id.todayText);
+        todayText.setText("TODAY-SCREEN");
 
         return v;
     }
