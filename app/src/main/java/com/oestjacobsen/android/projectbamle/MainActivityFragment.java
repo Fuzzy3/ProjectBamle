@@ -1,11 +1,10 @@
 package com.oestjacobsen.android.projectbamle;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,51 +17,54 @@ import com.oestjacobsen.android.projectbamle.Fragments.HistoryFragment;
 import com.oestjacobsen.android.projectbamle.Fragments.TodayFragment;
 import com.oestjacobsen.android.projectbamle.Fragments.TodoFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.oestjacobsen.android.projectbamle.R.id.vpPager;
+
 
 public class MainActivityFragment extends Fragment {
     FragmentPagerAdapter viewPagerAdapter;
+
+    @BindView(R.id.sliding_tabs) TabLayout mSlidingTabs;
+    @BindView(vpPager) ViewPager mVpPager;
+    @BindView(R.id.floatingButAdd) FloatingActionButton mFloatingButAdd;
 
 
     public MainActivityFragment() {
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.main_fragment, container, false);
+        View v = inflater.inflate(R.layout.main_fragment, container, false);
+        ButterKnife.bind(this, v);
 
-        ViewPager vpPager = (ViewPager) v.findViewById(R.id.vpPager);
+
         viewPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager(),getActivity());
-        vpPager.setAdapter(viewPagerAdapter);
-
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.floatingButAdd);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mVpPager.setAdapter(viewPagerAdapter);
+        mFloatingButAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "BUTTON PRESSED!! WOOP", Toast.LENGTH_SHORT).show();
             }
         });
 
-        TabLayout tabLayout = (TabLayout) v.findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(vpPager);
-
+        mSlidingTabs.setupWithViewPager(mVpPager);
         return v;
     }
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-
 
 
     //Adapter
     public class MyPagerAdapter extends FragmentPagerAdapter {
         static final int NUM_TABS = 3;
-        private String tabTitles[] = new String[] { "Today", "Todo", "History" };
+        private String tabTitles[] = new String[]{"Today", "Todo", "History"};
         private Context context;
 
 
