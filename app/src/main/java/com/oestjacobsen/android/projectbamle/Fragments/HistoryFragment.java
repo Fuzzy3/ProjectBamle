@@ -33,10 +33,7 @@ public class HistoryFragment extends Fragment {
         View v = inflater.inflate(R.layout.history_fragment, container, false);
         ButterKnife.bind(this, v);
 
-        mHistoryNotes = Note.generateNotes(30);
-        NotesAdapter adapter = new NotesAdapter(getContext(), mHistoryNotes);
-        mHistoryRecyclerView.setAdapter(adapter);
-        mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        updateUI();
 
         mHistoryText.setText("HISTORY-SCREEN");
         return v;
@@ -45,5 +42,12 @@ public class HistoryFragment extends Fragment {
     public static HistoryFragment newInstance() {
         HistoryFragment fragment_history = new HistoryFragment();
         return fragment_history;
+    }
+
+    public void updateUI() {
+        mHistoryNotes = Note.generateNotes(30);
+        NotesAdapter adapter = new NotesAdapter(getActivity(), mHistoryNotes);
+        mHistoryRecyclerView.setAdapter(adapter);
+        mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

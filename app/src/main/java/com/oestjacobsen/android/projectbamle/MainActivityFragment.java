@@ -19,13 +19,13 @@ import com.oestjacobsen.android.projectbamle.Fragments.TodoFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.oestjacobsen.android.projectbamle.R.id.vpPager;
 
 
 public class MainActivityFragment extends Fragment {
     FragmentPagerAdapter viewPagerAdapter;
-
     @BindView(R.id.sliding_tabs) TabLayout mSlidingTabs;
     @BindView(vpPager) ViewPager mVpPager;
     @BindView(R.id.floatingButAdd) FloatingActionButton mFloatingButAdd;
@@ -43,15 +43,14 @@ public class MainActivityFragment extends Fragment {
 
         viewPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager(),getActivity());
         mVpPager.setAdapter(viewPagerAdapter);
-        mFloatingButAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "BUTTON PRESSED!! WOOP", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         mSlidingTabs.setupWithViewPager(mVpPager);
         return v;
+    }
+
+    @OnClick(R.id.floatingButAdd)
+    public void addNote() {
+        Toast.makeText(getActivity(), "BUTTON PRESSED!! WOOP", Toast.LENGTH_SHORT).show();
     }
 
 

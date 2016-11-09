@@ -34,7 +34,7 @@ public class TodoFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         mTodoNotes = Note.generateNotes(30);
-        NotesAdapter adapter = new NotesAdapter(getContext(), mTodoNotes);
+        NotesAdapter adapter = new NotesAdapter(getActivity(), mTodoNotes);
         mTodoRecyclerView.setAdapter(adapter);
         mTodoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

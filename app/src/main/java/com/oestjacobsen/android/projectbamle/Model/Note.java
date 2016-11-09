@@ -2,13 +2,19 @@ package com.oestjacobsen.android.projectbamle.Model;
 
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Note {
 
-    private String mName;
+    private String mName = "NoName";
+    private final UUID mId;
 
-    public Note(String name) {
-        mName = name;
+    public Note() {
+        mId = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public String getName() {
@@ -23,7 +29,9 @@ public class Note {
     public static ArrayList<Note> generateNotes(int count){
         ArrayList<Note> Notes = new ArrayList<>();
         for(int i = 0; i < count; i++) {
-            Notes.add(new Note("Note" + i));
+            Note note = new Note();
+            note.setName("Note" + i);
+            Notes.add(note);
         }
         return Notes;
     }

@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingTop="10dp"
-              android:paddingBottom="10dp">
-    <TextView
-        android:id="@+id/note_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
-    
-</LinearLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.oestjacobsen.android.projectbamle.ViewModels.NoteViewModel"/>
+    </data>
+    <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingTop="10dp"
+                  android:paddingBottom="10dp"
+                  android:onClick="@{(view) -> viewModel.onNoteClicked(view)}">
+        <TextView
+            android:id="@+id/note_name"
+            android:text="@{viewModel.name}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+</layout>
