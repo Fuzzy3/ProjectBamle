@@ -7,14 +7,15 @@ import java.util.UUID;
 public class Note {
 
     private String mName = "NoName";
-    private final UUID mId;
+    private final UUID mUUID;
+    private NoteType mType;
 
     public Note() {
-        mId = UUID.randomUUID();
+        mUUID = UUID.randomUUID();
     }
 
-    public UUID getId() {
-        return mId;
+    public UUID getUUID() {
+        return mUUID;
     }
 
     public String getName() {
@@ -25,14 +26,12 @@ public class Note {
         mName = name;
     }
 
-
-    public static ArrayList<Note> generateNotes(int count){
-        ArrayList<Note> Notes = new ArrayList<>();
-        for(int i = 0; i < count; i++) {
-            Note note = new Note();
-            note.setName("Note" + i);
-            Notes.add(note);
-        }
-        return Notes;
+    public void setType(NoteType type) {
+        mType = type;
     }
+
+    public NoteType getType() {
+        return mType;
+    }
+
 }

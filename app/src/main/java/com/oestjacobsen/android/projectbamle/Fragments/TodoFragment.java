@@ -10,16 +10,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.oestjacobsen.android.projectbamle.Model.Note;
+import com.oestjacobsen.android.projectbamle.Model.NoteLab;
+import com.oestjacobsen.android.projectbamle.Model.NoteType;
 import com.oestjacobsen.android.projectbamle.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class TodoFragment extends Fragment {
-    ArrayList<Note> mTodoNotes;
+    List<Note> mTodoNotes;
     @BindView(R.id.todoText) TextView mTodoText;
     @BindView(R.id.todoRecyclerView) RecyclerView mTodoRecyclerView;
 
@@ -33,14 +36,9 @@ public class TodoFragment extends Fragment {
         View view = inflater.inflate(R.layout.todo_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        mTodoNotes = Note.generateNotes(30);
-        NotesAdapter adapter = new NotesAdapter(getActivity(), mTodoNotes);
-        mTodoRecyclerView.setAdapter(adapter);
-        mTodoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         mTodoText.setText("TODO-SCREEN");
 
-
+        updateUI();
         return view;
     }
 
@@ -52,6 +50,24 @@ public class TodoFragment extends Fragment {
         args.putString("someTitle", title);
         fragmentFirst.setArguments(args);*/
         return fragmentTodo;
+    }
+
+    private void updateUI() {
+        fillTodoNotes();
+        NotesAdapter adapter = new NotesAdapter(getActivity(), mTodoNotes);
+        mTodoRecyclerView.setAdapter(adapter);
+        mTodoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void fillTodoNotes() {
+        mTodoNotes = new ArrayList<>();
+        NoteLab noteLab = NoteLab.get(getActivity());
+        for (Note note : noteLab.getNotes()) {
+            if(note.getType() == NoteType.Todo) {
+                mTodoNotes.add(note);
+            }
+        }
+
     }
 
 }

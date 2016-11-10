@@ -10,16 +10,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.oestjacobsen.android.projectbamle.Model.Note;
+import com.oestjacobsen.android.projectbamle.Model.NoteLab;
+import com.oestjacobsen.android.projectbamle.Model.NoteType;
 import com.oestjacobsen.android.projectbamle.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class HistoryFragment extends Fragment {
-    private ArrayList<Note> mHistoryNotes;
+    private List<Note> mHistoryNotes;
     @BindView(R.id.historyText) TextView mHistoryText;
     @BindView(R.id.historyRecyclerView) RecyclerView mHistoryRecyclerView;
 
@@ -45,9 +48,19 @@ public class HistoryFragment extends Fragment {
     }
 
     public void updateUI() {
-        mHistoryNotes = Note.generateNotes(30);
+        fillHistoryNotes();
         NotesAdapter adapter = new NotesAdapter(getActivity(), mHistoryNotes);
         mHistoryRecyclerView.setAdapter(adapter);
         mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void fillHistoryNotes() {
+        mHistoryNotes = new ArrayList<>();
+        NoteLab noteLab = NoteLab.get(getActivity());
+        for (Note note : noteLab.getNotes()) {
+            if(note.getType() == NoteType.History) {
+                mHistoryNotes.add(note);
+            }
+        }
     }
 }

@@ -70,9 +70,5 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             mBinding.executePendingBindings();
         }
 
-        public void onClick(View v) {
-            Toast.makeText(mBinding.getRoot().getContext(), mNote.getName() + " PRESSED!!", Toast.LENGTH_SHORT).show();
-        }
-
     }
 }
