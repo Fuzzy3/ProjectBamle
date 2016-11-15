@@ -1,7 +1,7 @@
 package com.oestjacobsen.android.projectbamle.Model;
 
 
-public class NoteDbSchema {
+public class TaskDbSchema {
     public static final class NoteTable {
         public static final String NAME = "notes";
 

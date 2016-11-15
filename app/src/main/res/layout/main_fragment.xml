@@ -17,7 +17,6 @@
             app:tabMode="fixed"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
-            app:tabSelectedTextColor="@color/colorPrimaryDark"
             style="@style/MyCustomTabLayout"/>
 
         <android.support.v4.view.ViewPager

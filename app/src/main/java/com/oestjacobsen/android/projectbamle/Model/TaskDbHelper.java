@@ -4,17 +4,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.oestjacobsen.android.projectbamle.Model.NoteDbSchema.NoteTable;
+import com.oestjacobsen.android.projectbamle.Model.TaskDbSchema.NoteTable;
 
 /**
  * Created by mr_oj on 10/11/2016.
  */
 
-public class NoteDbHelper extends SQLiteOpenHelper {
+public class TaskDbHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATAABASE_NAME = "noteBase.db";
 
-    public NoteDbHelper(Context context) {
+    public TaskDbHelper(Context context) {
         super(context, DATAABASE_NAME, null, VERSION);
     }
 

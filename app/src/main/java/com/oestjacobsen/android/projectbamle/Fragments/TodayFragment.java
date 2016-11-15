@@ -1,6 +1,5 @@
 package com.oestjacobsen.android.projectbamle.Fragments;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,25 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.oestjacobsen.android.projectbamle.Model.Note;
-import com.oestjacobsen.android.projectbamle.Model.NoteLab;
-import com.oestjacobsen.android.projectbamle.Model.NoteType;
+import com.oestjacobsen.android.projectbamle.Model.Task;
+import com.oestjacobsen.android.projectbamle.Model.TaskLab;
+import com.oestjacobsen.android.projectbamle.Model.TaskType;
 import com.oestjacobsen.android.projectbamle.R;
-import com.oestjacobsen.android.projectbamle.databinding.TodayFragmentBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
 public class TodayFragment extends Fragment {
 
     //private TodayFragmentBinding mTodayBinding;
 
-    private List<Note> mTodayNotes;
+    private List<Task> mTodayTasks;
 
-    @BindView(R.id.todayText) TextView mTodayText;
     @BindView(R.id.todayRecyclerView) RecyclerView mTodayRecyclerView;
 
     @Override
@@ -43,7 +41,6 @@ public class TodayFragment extends Fragment {
         View v = inflater.inflate(R.layout.today_fragment, container, false);
         ButterKnife.bind(this, v);
         updateUI();
-        mTodayText.setText("TODAY-SCREEN");
         return v;
     }
 
@@ -54,17 +51,21 @@ public class TodayFragment extends Fragment {
 
     private void updateUI() {
         fillTodayNotes();
-        NotesAdapter adapter = new NotesAdapter(getActivity(), mTodayNotes);
-        mTodayRecyclerView.setAdapter(adapter);
+
+        SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
+        sectionAdapter.addSection(new TodoSection(getActivity(), mTodayTasks));
+        sectionAdapter.addSection(new DoneSection(getActivity(), mTodayTasks));
+
+        mTodayRecyclerView.setAdapter(sectionAdapter);
         mTodayRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void fillTodayNotes() {
-        NoteLab noteLab = NoteLab.get(getActivity());
-        mTodayNotes = new ArrayList<>();
-        for(Note note : noteLab.getNotes()) {
-            if(note.getType() == NoteType.Today)  {
-                mTodayNotes.add(note);
+        TaskLab taskLab = TaskLab.get(getActivity());
+        mTodayTasks = new ArrayList<>();
+        for(Task task : taskLab.getTasks()) {
+            if(task.getType() == TaskType.Today)  {
+                mTodayTasks.add(task);
             }
         }
 

@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.oestjacobsen.android.projectbamle.Model.Note;
-import com.oestjacobsen.android.projectbamle.Model.NoteLab;
-import com.oestjacobsen.android.projectbamle.Model.NoteType;
+import com.oestjacobsen.android.projectbamle.Model.Task;
+import com.oestjacobsen.android.projectbamle.Model.TaskLab;
+import com.oestjacobsen.android.projectbamle.Model.TaskType;
 import com.oestjacobsen.android.projectbamle.R;
 
 import java.util.ArrayList;
@@ -22,8 +22,7 @@ import butterknife.ButterKnife;
 
 
 public class TodoFragment extends Fragment {
-    List<Note> mTodoNotes;
-    @BindView(R.id.todoText) TextView mTodoText;
+    List<Task> mTodoTasks;
     @BindView(R.id.todoRecyclerView) RecyclerView mTodoRecyclerView;
 
     @Override
@@ -36,7 +35,6 @@ public class TodoFragment extends Fragment {
         View view = inflater.inflate(R.layout.todo_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        mTodoText.setText("TODO-SCREEN");
 
         updateUI();
         return view;
@@ -54,17 +52,17 @@ public class TodoFragment extends Fragment {
 
     private void updateUI() {
         fillTodoNotes();
-        NotesAdapter adapter = new NotesAdapter(getActivity(), mTodoNotes);
+        TasksAdapter adapter = new TasksAdapter(getActivity(), mTodoTasks);
         mTodoRecyclerView.setAdapter(adapter);
         mTodoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void fillTodoNotes() {
-        mTodoNotes = new ArrayList<>();
-        NoteLab noteLab = NoteLab.get(getActivity());
-        for (Note note : noteLab.getNotes()) {
-            if(note.getType() == NoteType.Todo) {
-                mTodoNotes.add(note);
+        mTodoTasks = new ArrayList<>();
+        TaskLab taskLab = TaskLab.get(getActivity());
+        for (Task task : taskLab.getTasks()) {
+            if(task.getType() == TaskType.Todo) {
+                mTodoTasks.add(task);
             }
         }
 

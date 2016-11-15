@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oestjacobsen.android.projectbamle.ViewModels.NoteViewModel"/>
+            type="com.oestjacobsen.android.projectbamle.ViewModels.TaskViewModel"/>
     </data>
     <LinearLayout
                   android:orientation="vertical"
@@ -14,7 +14,7 @@
                   android:onClick="@{(view) -> viewModel.onNoteClicked(view)}">
         <TextView
             android:id="@+id/note_name"
-            android:text="@{viewModel.name}"
+            android:text="@{viewModel.title}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

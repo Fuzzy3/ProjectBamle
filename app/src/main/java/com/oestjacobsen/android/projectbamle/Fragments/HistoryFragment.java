@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.oestjacobsen.android.projectbamle.Model.Note;
-import com.oestjacobsen.android.projectbamle.Model.NoteLab;
-import com.oestjacobsen.android.projectbamle.Model.NoteType;
+import com.oestjacobsen.android.projectbamle.Model.Task;
+import com.oestjacobsen.android.projectbamle.Model.TaskLab;
+import com.oestjacobsen.android.projectbamle.Model.TaskType;
 import com.oestjacobsen.android.projectbamle.R;
 
 import java.util.ArrayList;
@@ -22,8 +22,7 @@ import butterknife.ButterKnife;
 
 
 public class HistoryFragment extends Fragment {
-    private List<Note> mHistoryNotes;
-    @BindView(R.id.historyText) TextView mHistoryText;
+    private List<Task> mHistoryTasks;
     @BindView(R.id.historyRecyclerView) RecyclerView mHistoryRecyclerView;
 
     @Override
@@ -38,7 +37,6 @@ public class HistoryFragment extends Fragment {
 
         updateUI();
 
-        mHistoryText.setText("HISTORY-SCREEN");
         return v;
     }
 
@@ -49,17 +47,17 @@ public class HistoryFragment extends Fragment {
 
     public void updateUI() {
         fillHistoryNotes();
-        NotesAdapter adapter = new NotesAdapter(getActivity(), mHistoryNotes);
+        TasksAdapter adapter = new TasksAdapter(getActivity(), mHistoryTasks);
         mHistoryRecyclerView.setAdapter(adapter);
         mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void fillHistoryNotes() {
-        mHistoryNotes = new ArrayList<>();
-        NoteLab noteLab = NoteLab.get(getActivity());
-        for (Note note : noteLab.getNotes()) {
-            if(note.getType() == NoteType.History) {
-                mHistoryNotes.add(note);
+        mHistoryTasks = new ArrayList<>();
+        TaskLab taskLab = TaskLab.get(getActivity());
+        for (Task task : taskLab.getTasks()) {
+            if(task.getType() == TaskType.History) {
+                mHistoryTasks.add(task);
             }
         }
     }
